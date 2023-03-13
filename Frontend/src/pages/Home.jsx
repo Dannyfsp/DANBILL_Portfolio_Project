@@ -1,12 +1,12 @@
 import React from 'react'
 import Header from "../components/Header"
-import SearchBar from '../components/SearchBar'
+import Search from '../components/Search'
 
 const Home = () => {
   return (
     <div>
-    <Header />
-    <SearchBar />
+      <Header />
+      <Search />
     </div>
   )
 }

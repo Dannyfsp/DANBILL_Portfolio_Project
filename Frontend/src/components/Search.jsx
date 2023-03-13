@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { FiSearch } from "react-icons/fi"
 import { MdFavorite} from "react-icons/md"
 import { FaShoppingCart, FaUserAlt } from "react-icons/fa"
-const SearchBar = () => {
+const Search = () => {
   const links = [
     {
       name: "Category A", 
@@ -54,4 +54,4 @@ const SearchBar = () => {
   )
 }
 
-export default SearchBar
+export default Search
