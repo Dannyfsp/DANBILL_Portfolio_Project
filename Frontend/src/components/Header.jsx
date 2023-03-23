@@ -20,7 +20,7 @@ const Header = () => {
             <ul className="flex text-gray-600">
                 <Link to="/" className="px-4 cursor-pointer hover:scale-125 hover:underline underline-offset-8">HOME</Link>
                 <Link to="/about" className="px-4 cursor-pointer hover:scale-125 hover:underline underline-offset-8">ABOUT</Link>
-                <Link to="/product" className="px-4 cursor-pointer hover:scale-125 hover:underline underline-offset-8">PRODUCT</Link>
+                <Link to="/products" className="px-4 cursor-pointer hover:scale-125 hover:underline underline-offset-8">PRODUCTS</Link>
                 <Link to="/faq" className="px-4 cursor-pointer hover:scale-125 hover:underline underline-offset-8">FAQ</Link>
             </ul>
         </div>
