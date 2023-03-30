@@ -1,0 +1,39 @@
+/* Key Features section */
+#features {
+  padding: 50px;
+  background-color: #f2f2f2;
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+.feature img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+/* About section */
+#about {
+  padding: 50px;
+  background-color: #fff;
+}
+
+#about ul {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+#about li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+#about li:last-child {
+  margin-right: 0;
+}
+
