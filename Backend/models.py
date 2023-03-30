@@ -5,11 +5,17 @@ from sqlalchemy.orm import relationship
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.ext.declarative import declarative_base
+from engine import mstorage
 Base = declarative_base()
 
-productCategory = Table("productCategory", 
+productCategory = Table("productCategory", Base.metadata, 
                         Column("productId", Integer, ForeignKey("products.id")),
                         Column("CategotyId", Integer, ForeignKey("categories.id")))
+def Save(self):
+    """ we impliment a funtion"""
+    storage.reload()
+    storage.new(self)
+    stotage.save()
 
 class User(UserMixin, Base):
     """This class contains all the relevant info of a user"""
@@ -41,6 +47,13 @@ class User(UserMixin, Base):
     def checkPassword(self, password):
         """We check if the hashed password matches"""
         return check_password_hash(self.password, password)
+
+    def __repr__(self):
+        """We get the  class attributes as strings"""
+        return f"ID: {self.id} \nFirstName: {self.firstName} \nEmail: {self.email}"
+    def save(self):
+        """saves the instance"""
+        Save()
     
 class Product(Base):
     """this is a class containing products"""
@@ -52,7 +65,7 @@ class Product(Base):
     priceAfter = Column(Float, nullable=False)
     reviews = Column(Integer)
     ratings = Column(Float)
-    categories = relationship("categories", secondary="productCategory", backref = "products")
+    categories = relationship("Category", secondary="productCategory", backref = "products")
 
     def to_dict(self):
         """We get the class in a dictionary"""
@@ -67,7 +80,11 @@ class Product(Base):
         }
 
     def __repr__(self) -> str:
-        return f"{self.name} {self.id} {self.description} {self.price}"
+        return f"ID: {self.id} \nName: {self.name} \nDescption: {self.description} \nPrice: {self.price}"
+
+    def save(self):
+        """saves the instance"""
+        Save()
     
 class Category(Base):
     """This is a class with all categories relatable stuff"""
@@ -83,4 +100,8 @@ class Category(Base):
         }
     
     def __repr__(self) -> str:
-        return f"{self.id} {self.name}"
+        return f"ID: {self.id} \nName: {self.name}"
+
+    def save(self):
+        """saves the instance"""
+        Save()
