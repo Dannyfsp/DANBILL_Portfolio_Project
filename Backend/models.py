@@ -5,24 +5,18 @@ from sqlalchemy.orm import relationship
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.ext.declarative import declarative_base
-from engine import mstorage
+import Backend
 Base = declarative_base()
 
 productCategory = Table("productCategory", Base.metadata, 
                         Column("productId", Integer, ForeignKey("products.id")),
                         Column("CategotyId", Integer, ForeignKey("categories.id")))
-def Save(self):
-    """ we impliment a funtion"""
-    storage.reload()
-    storage.new(self)
-    stotage.save()
 
 class User(UserMixin, Base):
     """This class contains all the relevant info of a user"""
     __tablename__ = "users"
     id = Column(Integer, primary_key=True, nullable=False)
-    firstName =Column(String(256), nullable=False)
-    lastName = Column(String(256), nullable=False)
+    name =Column(String(256), nullable=False)
     email = Column(String(256), unique=True, nullable=False)
 
     def to_dict(self):
@@ -53,7 +47,8 @@ class User(UserMixin, Base):
         return f"ID: {self.id} \nFirstName: {self.firstName} \nEmail: {self.email}"
     def save(self):
         """saves the instance"""
-        Save()
+        Backend.Storage.new(self)
+        Backend.Storage.save()
     
 class Product(Base):
     """this is a class containing products"""
@@ -84,7 +79,8 @@ class Product(Base):
 
     def save(self):
         """saves the instance"""
-        Save()
+        Backend.Storage.new(self)
+        Backend.Storage.save()
     
 class Category(Base):
     """This is a class with all categories relatable stuff"""
@@ -104,4 +100,5 @@ class Category(Base):
 
     def save(self):
         """saves the instance"""
-        Save()
+        Backend.Storage.new(self)
+        Backend.Storage.save()

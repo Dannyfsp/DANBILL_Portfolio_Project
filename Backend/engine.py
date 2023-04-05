@@ -2,7 +2,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from os import getenv
-from models import User, Category, Product, Base
 
 
 class storage():
@@ -35,6 +34,7 @@ class storage():
 
     def reload(self):
         """reloads data from the database"""
+        from Backend.models import Base
         Base.metadata.create_all(self.__engine)
         sess_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(sess_factory)
