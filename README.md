@@ -1,7 +1,10 @@
 # DANBILL
 ## Background Context
+![danbill architecture](./assets/Research%20%26%20Project%20Architecture.jpg)
 An e-commerce portfolio project given by ALX.
+A solution that connects buyers and sellers. 
 This project comprises of both Frontend and Backend and latest technologies above all.
+As you can see in the above picture, the UI was done using ReactJS and Tailwindcss, while the backend was done using Flask, SQLAlchemy and MySQL.
 ### Authors
 - Aghogho Daniel Bogare
 - Bill Otieno
