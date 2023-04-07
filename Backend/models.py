@@ -9,8 +9,10 @@ import Backend
 Base = declarative_base()
 
 productCategory = Table("productCategory", Base.metadata, 
-                        Column("productId", Integer, ForeignKey("products.id")),
-                        Column("CategotyId", Integer, ForeignKey("categories.id")))
+                        Column("productId", Integer, ForeignKey("products.id", onupdate='CASCADE',
+                            ondelete='CASCADE')),
+                        Column("CategotyId", Integer, ForeignKey("categories.id", onupdate='CASCADE',
+                            ondelete='CASCADE')))
 
 class User(UserMixin, Base):
     """This class contains all the relevant info of a user"""
@@ -18,13 +20,17 @@ class User(UserMixin, Base):
     id = Column(Integer, primary_key=True, nullable=False)
     name =Column(String(256), nullable=False)
     email = Column(String(256), unique=True, nullable=False)
+    def __init__(self, *args, **kwargs):
+        """ we initialises the User class """
+        if kwargs:
+            for k, v in kwargs.items():
+                setattr(self, k, v)
 
     def to_dict(self):
         """We create a dict with the class attributes as values"""
         return {
             "id": self.id,
-            "firstName": self.firstName,
-            "lastName": self.lastName,
+            "name": self.name,
             "email": self.email
         }
     
@@ -44,7 +50,7 @@ class User(UserMixin, Base):
 
     def __repr__(self):
         """We get the  class attributes as strings"""
-        return f"ID: {self.id} \nFirstName: {self.firstName} \nEmail: {self.email}"
+        return f"ID: {self.id} \nFirstName: {self.name} \nEmail: {self.email}"
     def save(self):
         """saves the instance"""
         Backend.Storage.new(self)
@@ -61,6 +67,12 @@ class Product(Base):
     reviews = Column(Integer)
     ratings = Column(Float)
     categories = relationship("Category", secondary="productCategory", backref = "products")
+
+    def __init__(self, *args, **kwargs):
+        """ we initialises the Product class """
+        if kwargs:
+            for k, v in kwargs.items():
+                setattr(self, k, v)
 
     def to_dict(self):
         """We get the class in a dictionary"""
@@ -87,6 +99,12 @@ class Category(Base):
     __tablename__ = "categories"
     id = Column(Integer, primary_key=True, nullable=False)
     name = Column(String(256), nullable= False)
+
+    def __init__(self, *args, **kwargs):
+        """ we initialises the Category class """
+        if kwargs:
+            for k, v in kwargs.items():
+                setattr(self, k, v)
 
     def to_dict(self):
         """Representing the class as dict"""
