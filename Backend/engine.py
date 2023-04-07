@@ -1,3 +1,4 @@
+
 #!/usr/bin/python3
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
@@ -39,6 +40,33 @@ class storage():
         sess_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(sess_factory)
         self.__session = Session
+    
+    def all(self, obj=None):
+        """we get all the objects in the database"""
+        from Backend.models import User, Category, Product
+        classdic = { "User": User, "Category":Category, "Product":Product}
+        objdict = {}
+        for cls in classdic:
+            if obj is None or obj is classdic[cls] or cls is obj:
+                objs = self.__session.query(classdic[cls]).all()
+                for ob in objs:
+                    key = ob.__class__.__name__ + "." + str(ob.id)
+                    objdict[key] = ob
+        return objdict
+    
+    def get(self, cls, id):
+        """ we retrive a particular class from the database"""
+        from Backend.models import User, Category, Product
+        from Backend import Storage
+        classdic = { "User": User, "Category":Category, "Product":Product}
+        if cls not in classdic.values():
+            return None
+        classes = Storage.all(cls)
+        for clas in classes.values():
+            if clas.id == int(id):
+                return clas
+        return None
+
 
     def close(self):
         """call remove() method on the private session attribute"""
