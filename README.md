@@ -50,8 +50,8 @@ It also contains the following methods:
 To use this script, you will need to have SQLAlchemy, Flask-Login, and Werkzeug installed. Once you have those dependencies installed, you can create instances of the User, Product, and Category classes and store them in a database using SQLAlchemy.
 
  ***console.py usage***
--set the environment variable my running the environ.sh `./environ.sh`
--confirm the environment variables have the correct values by running the environ.py `./environ.py`
--to get the deatils of a user if you have the user class and id run the console.py `./console.py` then type show User 1 where 1 is the id of the user
--to create a user `./console.py` then type create User name="user" email="user@app" this creates a user with the given attributes
+- set the environment variable my running the environ.sh `./environ.sh`
+- confirm the environment variables have the correct values by running the environ.py `./environ.py`
+- to get the deatils of a user if you have the user class and id run the console.py `./console.py` then type `show User 1` where 1 is the id of the user
+- to create a user `./console.py` then type `create User name="user" email="user@app"` this creates a user with the given attributes
  
